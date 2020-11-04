@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Improved invite.js">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Updated serverinfo.js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/general/serverinfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/general/serverinfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/owner/bluefoxapp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/staff/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/staff/setup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604521181482</updated>
-      <workItem from="1604521182525" duration="1792000" />
+      <workItem from="1604521182525" duration="1968000" />
     </task>
     <task id="LOCAL-00001" summary="Config cleanup">
       <created>1604522770213</created>
@@ -79,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604522903838</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated serverinfo.js">
+      <created>1604523010916</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604523010916</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -88,7 +95,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Config cleanup" />
     <MESSAGE value="Improved invite.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved invite.js" />
+    <MESSAGE value="Updated serverinfo.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated serverinfo.js" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2004" y="475" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604521308051">

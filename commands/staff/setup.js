@@ -2,6 +2,8 @@ const discord = require('discord.js')
 
 module.exports.run = async (client, message, args) => {
 
+    return;
+
     if (!message.member.hasPermission("ADMINISTRATOR") && !client.isOwner(message)) { return await client.sendErrorEmbed(message.channel, `Insufficient Permissions`); }
 
     const filter = m => m.author.id === message.author.id;
