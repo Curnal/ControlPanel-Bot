@@ -13,8 +13,6 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     let online = message.guild.memberCount - (idle + dnd);
     let offline = message.guild.memberCount - (online + idle + dnd);
 
-    let roles = message.guild.roles.cache.map(roles => `${roles}`).join(', ').substr(0, 1024);
-
 
     const embed = new Discord.MessageEmbed()
         .setColor(client.config.embed.color)
@@ -38,10 +36,6 @@ Region: \`${message.guild.region}\`
 Created: \`${message.guild.createdAt.toDateString()}\`
 Owner: \`${message.guild.owner.user.tag}\`
 `, false)
-
-    embed.addField(`🔰 Roles [${message.guild.roles.cache.size}]`, `
-${roles}
-`, true)
 
         .setFooter(client.config.embed.footer)
         .setTimestamp();
