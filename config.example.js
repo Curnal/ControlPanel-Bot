@@ -5,7 +5,6 @@
 */
 
 // Do not change
-let version = "1.0.0";
 let author = "FlaringPhoenix#0001";
 
 // Basic options (all required)
@@ -52,7 +51,6 @@ let log = {
 }
 
 module.exports = {
-    version,
     author,
     botName,
     owners,
