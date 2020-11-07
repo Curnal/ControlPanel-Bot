@@ -10,7 +10,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     let key = guildConf.panel.apiKey;
 
     let nestID = args[0];
-    if (!panel) { return await client.sendErrorEmbed(message.channel, "You must provide an egg id"); }
+    if (!nestID) { return await client.sendErrorEmbed(message.channel, "You must provide an egg id"); }
 
     if (!panel) { return await client.sendErrorEmbed(message.channel, "No panel has been setup!"); }
     if (!key) { return await client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!link API-KEY"); }

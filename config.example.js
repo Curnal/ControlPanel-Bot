@@ -29,7 +29,7 @@ let links = {
 // Your api keys
 let api = {
     statcord: "", // https://statcord.com/
-    pastebin: "" // https://pastebin.com/doc_scraping_api
+    pastebin: "" // https://pastebin.com/doc_api
 }
 
 // Default embed options

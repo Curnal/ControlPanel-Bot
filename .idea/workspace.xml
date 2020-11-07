@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Disabled setup.js until finished">
+    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Fixed startup issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/panel.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/panel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.example.js" beforeDir="false" afterPath="$PROJECT_DIR$/config.example.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1604521181482</updated>
       <workItem from="1604521182525" duration="2109000" />
-      <workItem from="1604729046839" duration="15000" />
+      <workItem from="1604729046839" duration="2718000" />
     </task>
     <task id="LOCAL-00001" summary="Config cleanup">
       <created>1604522770213</created>
@@ -93,24 +113,47 @@
       <option name="project" value="LOCAL" />
       <updated>1604523203520</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed startup issue">
+      <created>1604729093946</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604729093946</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Config cleanup" />
     <MESSAGE value="Improved invite.js" />
     <MESSAGE value="Updated serverinfo.js" />
     <MESSAGE value="Disabled setup.js until finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="Disabled setup.js until finished" />
+    <MESSAGE value="Fixed startup issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed startup issue" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2004" y="475" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604521308051">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2004" y="475" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604521308051" />
+    <state x="1482" y="378" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604732100388">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1482" y="378" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732100388" />
     <state x="1678" y="375" key="FileChooserDialogImpl" timestamp="1604522456284">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -123,25 +166,30 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1697" y="338" key="Github.UntrackedFilesDialog/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604522541069" />
-    <state width="2135" height="318" key="GridCell.Tab.0.bottom" timestamp="1604523317039">
+    <state width="2135" height="318" key="GridCell.Tab.0.bottom" timestamp="1604732102732">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state width="2135" height="318" key="GridCell.Tab.0.bottom/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
     <state width="2135" height="318" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604523317039" />
-    <state width="2135" height="318" key="GridCell.Tab.0.center" timestamp="1604523317039">
+    <state width="2135" height="318" key="GridCell.Tab.0.center" timestamp="1604732102732">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state width="2135" height="318" key="GridCell.Tab.0.center/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
     <state width="2135" height="318" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604523317039" />
-    <state width="2135" height="318" key="GridCell.Tab.0.left" timestamp="1604523317039">
+    <state width="2135" height="318" key="GridCell.Tab.0.left" timestamp="1604732102731">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state width="2135" height="318" key="GridCell.Tab.0.left/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102731" />
     <state width="2135" height="318" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604523317039" />
-    <state width="2135" height="318" key="GridCell.Tab.0.right" timestamp="1604523317039">
+    <state width="2135" height="318" key="GridCell.Tab.0.right" timestamp="1604732102732">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state width="2135" height="318" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
     <state width="2135" height="318" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604523317039" />
-    <state x="1339" y="363" key="Vcs.Push.Dialog.v2" timestamp="1604523209532">
+    <state x="1339" y="363" key="Vcs.Push.Dialog.v2" timestamp="1604729109120">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
+    <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604729109120" />
     <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604523209532" />
   </component>
 </project>

@@ -43,7 +43,7 @@ client.userDB = new Enmap({
 // Sets default settings for each server
 const defaultServerDB = {
     commandsRun: 0,
-    prefix: "cp!",
+    prefix: "cp!!",
     panel: {
         apiKey: "",
         url: ""
