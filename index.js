@@ -8,9 +8,7 @@ const Enmap = require('enmap');
 require('moment-duration-format');
 
 // Create client
-const client = new Discord.Client({
-    fetchAllMembers: true
-});
+const client = new Discord.Client();
 
 // Loads config.js
 config = require('./config.js');
