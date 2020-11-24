@@ -57,7 +57,7 @@ ${p}info
 
     });
 
-    client.userDB.set(`${message.author.id}-${message.guild.id}`, serverID, "focused");
+    client.userDB.set(`${message.author.id}-${message.guild.id}`, serverID, "panel.focused");
 
     return;
 

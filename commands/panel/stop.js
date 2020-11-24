@@ -9,7 +9,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     if (!panel) return client.sendErrorEmbed(message.channel, "No panel has been setup!");
     if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
 
-    if (userConf.panel.focused === null) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
+    if (userConf.panel.focused === null) return client.sendErrorEmbed(message.channel, "You havent focused a server");
 
     request.get(`${panel}/api/client/servers/${userConf.panel.focused}/power`, {
         auth: {
