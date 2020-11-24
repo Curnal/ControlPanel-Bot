@@ -1,7 +1,6 @@
 module.exports = async (client, message) => {
 
     if (message.author.bot) return;
-    if (!client.isOwner(message)) return;
 
     let args;
     let guildConf;
