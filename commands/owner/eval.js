@@ -1,6 +1,10 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 
+/*
+    Credit: WilsontheWolf#0074
+ */
+
 exports.run = async (client, message, args, guildConf, userConf) => {
 
     const embed = new Discord.MessageEmbed()
