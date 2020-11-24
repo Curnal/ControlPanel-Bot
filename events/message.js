@@ -1,9 +1,7 @@
-const PastebinAPI = require('pastebin-js');
-const Discord = require('discord.js');
-
 module.exports = async (client, message) => {
 
-    if (message.author.bot) { return; }
+    if (message.author.bot) return;
+    if (!client.isOwner(message)) return;
 
     let args;
     let guildConf;
@@ -11,25 +9,38 @@ module.exports = async (client, message) => {
 
     if (message.guild) {
 
-        // Ensures the guild is in the database
         guildConf = client.serverDB.ensure(message.guild.id, client.defaultServerDB);
 
         userConf = client.userDB.ensure(`${message.author.id}-${message.guild.id}`, {
-                guild: message.guild.id,
-                user: message.author.id,
-                cooldowns: {},
+            guild: message.guild.id,
+            user: message.author.id,
+            cooldowns: {},
+            panel: {
                 focused: null,
                 apiKey: null,
-                servers: [],
-                lastSeen: Date.now()
+                data: {},
+                servers: []
+            },
+            store: {
+                balance: 0,
+                payments: [],
+                paymentMethods: [],
+                products: {
+                    active: [],
+                    pending: [],
+                    suspended: [],
+                    cancelled: []
+                }
+            },
+            lastSeen: Date.now()
         });
 
-        if (message.content.indexOf(guildConf.prefix) !== 0) { return; }
+        if (message.content.indexOf(guildConf.prefix) !== 0) return;
         args = message.content.slice(guildConf.prefix.length).trim().split(/ +/g);
 
     } else {
 
-        if (message.content.indexOf(client.config.dmPrefix) !== 0) { return; }
+        if (message.content.indexOf(client.config.dmPrefix) !== 0) return;
         args = message.content.slice(client.config.dmPrefix.length).trim().split(/ +/g);
 
     }
@@ -37,15 +48,21 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
     const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 
-    if (client.config.deleteMessage) { await message.delete(); }
-    if (!cmd) { return; }
-    if (!message.guild && !cmd.help.dm) { await client.sendEmbed(message.channel, "You may only use that command in servers!"); return; }
+    if (client.config.deleteMessage) await message.delete();
+    if (!cmd) return;
+    if (!message.guild && !cmd.help.dm) return client.sendEmbed(message.channel, "You may only use that command in servers!");
 
     if (cmd.help.cooldown != null) {
         if (client.hasCooldown(message.author.id, message.guild.id, cmd.help.name)) {
-            return await message.react("⏰");
+            return message.react("⏰");
         } else {
             client.addCooldown(message.author.id, message.guild.id, cmd.help.name, cmd.help.cooldown);
+        }
+    }
+
+    if (cmd.help.staff != null) {
+        if (!message.member.hasPermission("ADMINISTRATOR") && !client.isOwner(message)) {
+            return client.sendErrorEmbed(message.channel, `Missing: ADMINISTRATOR`);
         }
     }
 

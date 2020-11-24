@@ -62,4 +62,14 @@ module.exports = (client) => {
         }
     }
 
+    client.generatePassword = (length = 10) => {
+        let n = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+        let password = "";
+        while (password.length < length) {
+            password += n[Math.floor(Math.random() * n.length)];
+        }
+        return password;
+    }
+
 }

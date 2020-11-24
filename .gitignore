@@ -1,14 +1,18 @@
 # Project exclude paths
 /node_modules/
-/.idea/
+/.idea/**
 
 # Project exlude files
 config.js
 
+# Exclude logs
+/logs/**
+!/logs/.gitkeep
+
+# Exclude databases
 /database/servers/enmap.sqlite
 /database/servers/enmap.sqlite-shm
 /database/servers/enmap.sqlite-wal
-
 /database/users/enmap.sqlite
 /database/users/enmap.sqlite-shm
 /database/users/enmap.sqlite-wal

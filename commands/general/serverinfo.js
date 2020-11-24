@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 
 exports.run = async (client, message, args, guildConf, userConf) => {
 
-    `\`${message.guild.roles.cache.filter(r => r.position !== 0).map(r => r.name).join(', ')}\``;
-
     let text = message.guild.channels.cache.filter(c => c.type === 'text').size;
     let voice = message.guild.channels.cache.filter(c => c.type === 'voice').size;
     let categories = message.guild.channels.cache.filter(c => c.type === 'category').size;

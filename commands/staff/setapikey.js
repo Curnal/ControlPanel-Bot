@@ -2,12 +2,10 @@ const discord = require('discord.js')
 
 module.exports.run = async (client, message, args) => {
 
-    if (!message.member.hasPermission("ADMINISTRATOR") && !client.isOwner(message)) {return await client.sendErrorEmbed(message.channel, `Insufficient Permissions`);}
-
     await message.delete();
-    let key = args[0];
 
-    if (!key) {return await client.sendErrorEmbed(message.channel, `You must provide an api key`);}
+    let key = args[0];
+    if (!key) return client.sendErrorEmbed(message.channel, `You must provide an api key`);
 
     // let expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
     // let regex = new RegExp(expression);
@@ -23,5 +21,6 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "setpanel",
+    staff: true,
     aliases: ["sp"]
 }

@@ -17,7 +17,7 @@ module.exports = (client, guildConf, message) => {
             cooldowns[pList[len-1]] = value;
         }
 
-        set(command, Date.now()+(time*1000));
+        set(command, Date.now() + (time*1000));
         return client.userDB.set(`${userid}-${guildid}`, cooldowns, "cooldowns");
 
     }
@@ -49,7 +49,7 @@ module.exports = (client, guildConf, message) => {
 
     client.resetCooldowns = (userid, guildid) => {
 
-        //TODO
+        return client.userDB.set(`${userid}-${guildid}`, {}, "cooldowns");
 
     }
 

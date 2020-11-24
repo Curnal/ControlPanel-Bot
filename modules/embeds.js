@@ -64,7 +64,7 @@ module.exports = (client, guildConf, message) => {
     }
 
     client.getEmbed = async (channel, message) => {
-        let m = await channel.fetchMessage(message);
+        let m = await channel.messages.fetch(message);
         return m.toString();
     }
 

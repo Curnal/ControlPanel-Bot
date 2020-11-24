@@ -3,26 +3,61 @@ const request = require('request');
 
 exports.run = async (client, message, args, guildConf, userConf) => {
 
-    let number = args[0];
-
     let panel = guildConf.panel.url;
-    let key = userConf.apiKey;
+    let key = userConf.panel.apiKey;
 
-    if (!panel) { return await client.sendErrorEmbed(message.channel, "No panel has been setup!"); }
-    if (!key) { return await client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!link API-KEY"); }
+    if (!panel) await client.sendErrorEmbed(message.channel, "No panel has been setup!");
+    if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
 
-    let servers = userConf.servers;
+    let serverID = args[0];
+    if (!serverID) return client.sendErrorEmbed(message.channel, "You must provide a valid server number!\nDo: cp!listservers to see your servers");
 
-    if (!number || isNaN(number)) { return await client.sendErrorEmbed(message.channel, "You must provide a valid server number!\nDo: cp!listservers to see your servers"); }
-    if (servers.length+1 < number) { return await client.sendErrorEmbed(message.channel, "Not a valid server number!\nDo: cp!listservers to see your servers"); }
+    request.get(`${panel}/api/client/servers/${serverID}`, {
+        auth: {
+            'bearer': key
+        }
+    }, async function(err, response, body) {
 
-    var server = servers[number-1];
+        if (response.statusCode === 404) return client.sendErrorEmbed(message.channel, "Could not find that server");
 
-    if (!server) { return await client.sendErrorEmbed(message.channel, "An error has occured"); }
+        body = JSON.parse(body).attributes;
 
-    client.userDB.set(`${message.author.id}-${message.guild.id}`, server.attributes.identifier, "focused");
-    
-    await client.sendEmbed(message.channel, "Server Focused!", `You can run \`cp!info\` to view information about the focused server`)
+        let p = guildConf.prefix;
+        await client.sendEmbed(message.channel, "Server Focused!", "", [
+            {
+                name: "Information",
+                value: `
+\`\`\`
+Name: ${body.name}
+ID: ${body.identifier}
+Description: ${body.description || "None"}
+\`\`\``
+            },
+            {
+                name: "Limits",
+                value: `
+\`\`\`
+Ram: ${body.limits.memory === 0 ? "∞" : body.limits.memory} MB
+Disk: ${body.limits.disk === 0 ? "∞" : body.limits.disk} MB
+CPU: ${body.limits.cpu}%
+\`\`\``
+            },
+            {
+                name: "Commands",
+                value: `
+\`\`\`
+${p}start
+${p}stop
+${p}kill
+${p}restart
+${p}info
+\`\`\``
+            }
+        ]);
+
+    });
+
+    client.userDB.set(`${message.author.id}-${message.guild.id}`, serverID, "focused");
 
     return;
 

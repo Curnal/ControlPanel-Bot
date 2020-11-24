@@ -2,22 +2,13 @@ const Discord = require('discord.js');
 
 exports.run = (client, message, args, guildConf, userConf) => {
 
-    client.sendEmbed(message.channel, `Ping?`).then(m => {
-
-        let roundTripLatency = m.createdTimestamp - message.createdTimestamp;
-        let websocketLatency = Math.round(client.ws.ping);
-
-        client.editEmbed(message.channel, m.id, 'Pong!', "", [
-            {
-                name: "RoundTrip",
-                value:`${roundTripLatency}ms`},
-            {
-                name: "Websocket Latency",
-                value:`${websocketLatency}ms`
-            }
-            ]);
-
-    });
+    client.sendEmbed(
+        message.channel,
+        `Latency`,
+        `
+        \`Bot Latency\` ${Date.now() - message.createdTimestamp}ms
+        \`API Latency\` ${Math.round(client.ws.ping)}ms`
+    );
 
 }
 

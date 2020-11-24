@@ -23,12 +23,16 @@ exports.run = async (client, message, args) => {
     embed.addField("General", `
     help, botstats, invite,
     ping, serverinfo, tutorial,
-    userinfo, discordstatus`, true);
+    userinfo, discordstatus`);
+
+    embed.addField("Billing", `
+    store, active, pending,
+    suspended, cancelled`);
 
     embed.addField("Panel", `
-    listservers, focus, info,
-    start, stop, restart, nodes,
-    panel, link, user`)
+    account, listservers, focus,
+    info, start, stop, restart,
+    nodes`)
 
     embed.addField("Staff", `
     setpanel, setapikey,
@@ -38,7 +42,8 @@ exports.run = async (client, message, args) => {
     if (client.isOwner(message)) {
         embed.addField("Owner", `
         eval, reload, servers,
-        panels, startall`)
+        panels, startall, reload,
+        load, unload`)
     }
 
     await message.channel.send(embed);

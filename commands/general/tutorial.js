@@ -13,7 +13,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     > key for staff commands
 
     __Personal Use__:
-    - cp!setpanel https://panel.host.com
+    - cp!setpanel https://panel.domain.com
     > Sets the panel url
     > for all commands
     

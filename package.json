@@ -1,23 +1,22 @@
 {
-  "name": "wispbot",
-  "version": "1.0.0",
+  "name": "controlpanel",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "FlaringPhoenix#0001",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.3.1",
+    "enmap": "^5.8.0",
+    "eslint": "^7.14.0",
     "moment": "^2.29.0",
     "moment-duration-format": "^2.3.2",
-    "nodemailer": "^6.4.13",
     "ping": "^0.3.0",
-    "snekfetch": "^4.0.4",
-    "enmap": "^5.8.0",
-    "pastebin-js": "^1.0.5",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "snekfetch": "^4.0.4"
   }
 }

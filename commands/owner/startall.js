@@ -4,26 +4,25 @@ const request = require('request');
 exports.run = async (client, message, args, guildConf, userConf) => {
 
     let panel = guildConf.panel.url;
-    let key = userConf.panel.apiKey;
+    let key = guildConf.panel.apiKey;
 
     if (!panel) return client.sendErrorEmbed(message.channel, "No panel has been setup!");
     if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
 
-    if (userConf.panel.focused === null) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
-
-    request.post(`${panel}/api/client/servers/${userConf.panel.focused}/power`, {
-        auth: {
+    request.post(`${panel}/api/application/users`, {
+        'auth': {
             'bearer': key
         },
-        json: {
-            signal: 'restart'
-        }
+        json: data
     }, async function(err, response, body) {
 
-        if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
-        if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
+        console.log(response)
 
-        await client.sendEmbed(message.channel, `Server restarting!`);
+        if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
+        if (response.statusCode === 403) { return await client.sendErrorEmbed(message.channel, "Invalid api key!"); }
+
+        await client.sendEmbed(message.channel, `Your account has been created!`);
+        await client.sendEmbed(message.author, `Account Details`, `**Username**: ${username}\n**Email**: ${email}\n**Password**: ${password}`);
 
     });
 
@@ -32,9 +31,8 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 }
 
 module.exports.help = {
-    name: "restart",
-    description: "Restarts the focused server",
+    name: "startall",
+    description: "Starts all servers on the panel",
     dm: false,
-    cooldown: 2,
-    aliases: ["restartserver"]
+    aliases: ["sa"]
 }

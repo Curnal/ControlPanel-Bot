@@ -26,12 +26,6 @@ let links = {
     website: "https://bluefoxhost.com",
 }
 
-// Your api keys
-let api = {
-    statcord: "", // https://statcord.com/
-    pastebin: "" // https://pastebin.com/doc_api
-}
-
 // Default embed options
 let embed = {
     color: "#27a9e1",
@@ -58,7 +52,6 @@ module.exports = {
     timeFormat,
     dmPrefix,
     links,
-    api,
     embed,
     deleteCommands,
     disabledCommands,

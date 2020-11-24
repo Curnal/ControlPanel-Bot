@@ -4,8 +4,6 @@ module.exports.run = async (client, message, args) => {
 
     return;
 
-    if (!message.member.hasPermission("ADMINISTRATOR") && !client.isOwner(message)) { return await client.sendErrorEmbed(message.channel, `Insufficient Permissions`); }
-
     const filter = m => m.author.id === message.author.id;
 
     await client.sendEmbed(message.channel, '**Welcome to the setup!**', 'Here i\'ll help you setup the bot for your server.\n> Firstly, Please tell me if you\'re using this bot for a custom panel **[I am/I am not]**');
@@ -49,7 +47,7 @@ module.exports.run = async (client, message, args) => {
                                 msg = collectedAPIKey.first();
                                 key = msg.content;
                                 if (msg.content.toLowerCase() === 'exit') return client.sendEmbed(message.channel, 'The Setup has been cancelled');
-                                    
+
                                 client.sendEmbed(message.channel, `Panel settings for "${guildName}"`, `> Panel URL: ${panel}\n> API Key: ||${key}||`);
                             }).catch((e) => {
                                 console.log(e);
@@ -87,5 +85,6 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "setup",
+    staff: true,
     aliases: []
 }

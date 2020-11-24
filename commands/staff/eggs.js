@@ -4,28 +4,26 @@ const request = require("request");
 
 exports.run = async (client, message, args, guildConf, userConf) => {
 
-    if (!message.member.hasPermission("ADMINISTRATOR") && !client.isOwner(message)) { return await client.sendErrorEmbed(message.channel, `Insufficient Permissions`);}
-
     let panel = guildConf.panel.url;
     let key = guildConf.panel.apiKey;
 
     let nestID = args[0];
-    if (!nestID) { return await client.sendErrorEmbed(message.channel, "You must provide an egg id"); }
+    if (!nestID) return client.sendErrorEmbed(message.channel, "You must provide an egg id");
 
-    if (!panel) { return await client.sendErrorEmbed(message.channel, "No panel has been setup!"); }
-    if (!key) { return await client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!link API-KEY"); }
+    if (!panel) return client.sendErrorEmbed(message.channel, "No panel has been setup!");
+    if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
 
     request.get(`${panel}/api/application/nests/${nestID}/eggs`, {
-        'auth': {
-            'bearer': key
+        auth: {
+            bearer: key
         }
     }, async function(err, response, body) {
 
-        if (err) { return client.sendErrorEmbed(message.channel, "Could not connect to panel"); }
-        if (response.statusCode === 403) { return await client.sendErrorEmbed(message.channel, "Invalid admin api key!"); }
+        if (err) return client.sendErrorEmbed(message.channel, "Could not connect to panel");
+        if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid admin api key!");
 
         try {
-            var body = JSON.parse(body);
+            body = JSON.parse(body);
         } catch(e) {
             return await client.sendErrorEmbed(message.channel, "An error has occured!");
         }
@@ -57,6 +55,6 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 module.exports.help = {
     name: "eggs",
     description: "Shows all of the a nest's eggs",
-    dm: true,
+    staff: true,
     aliases: []
 }

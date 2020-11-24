@@ -9,7 +9,7 @@ exports.run = (client, message, args, guildConf, userConf) => {
 
             body = JSON.parse(body);
 
-            client.editEmbed(m.channel, m.id, "Discord Status", "", [
+            let editEmbed = client.editEmbed(m.channel, m.id, "Discord Status", "", [
                 {
                     name: "Page",
                     value: `URL: ${body.page.url}`
@@ -18,7 +18,7 @@ exports.run = (client, message, args, guildConf, userConf) => {
                     name: `Status`,
                     value: `Type: ${body.status.indicator}\nDescription: ${body.status.description}`
                 }
-            ], `Last Updated @ ${body.page.id.updated_at}`)
+            ], `Last Updated @ ${body.page.id.updated_at}`);
 
         });
 
