@@ -75,7 +75,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
                 if (err) return client.sendErrorEmbed(message.channel, "An error has occured!");
                 if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
 
-                client.userDB.set(`${message.author.id}-${message.guild.id}`, key, "panel.apiKey");
+                client.userDB.set(`${message.author.id}-${message.guild.id}`, userKey, "panel.apiKey");
                 return client.sendEmbed(message.channel, "Your account has been linked!");
 
             });
