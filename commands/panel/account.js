@@ -82,7 +82,16 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
             return;
         }
+        case "unlink": {
+
+            if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
+
+            client.userDB.set(`${message.author.id}-${message.guild.id}`, [], "panel");
+            return client.sendEmbed(message.channel, "Your account has been unlinked!");
+
+        }
         case "info": {
+
             if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
 
             let user = userConf.panel.data;
@@ -101,6 +110,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 `)
         }
         case "reset": {
+
             if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
 
             let password = client.generatePassword(10);
@@ -139,7 +149,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         }
     }
 
-    return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, link, info, reset\`\`\`")
+    return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, link, unlink, info, reset\`\`\`")
 
 }
 
