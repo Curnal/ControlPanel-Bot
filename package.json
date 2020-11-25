@@ -18,5 +18,8 @@
     "ping": "^0.3.0",
     "request": "^2.88.2",
     "snekfetch": "^4.0.4"
+  },
+  "devDependencies": {
+    "nodemailer": "^6.4.16"
   }
 }

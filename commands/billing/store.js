@@ -56,6 +56,7 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 duration: 0,
                 limit: 0,
                 eggID: 0,
+                nestID: 0,
                 ram: 0,
                 disk: 0,
                 cpu: 0
@@ -99,16 +100,16 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                                             if (content < 0) return client.sendErrorEmbed(message.channel, "The duration cannot be a negative number");;
                                             data.duration = content;
 
-                                            // Ask for product egg id
-                                            question = client.sendEmbed(message.channel, "Product Creation", "What egg would you like this service to use from the panel? (Egg ID)")
+                                            // Ask for product nest id
+                                            question = client.sendEmbed(message.channel, "Product Creation", "What nest would you like this service to use from the panel? (Nest ID)")
                                             message.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
                                                 .then(collected => {
                                                     let msg = collected.first();
                                                     let content = Number(msg.content);
                                                     if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
-                                                    if (content < 0) return client.sendErrorEmbed(message.channel, "The egg id cannot be a negative number");
+                                                    if (content < 0) return client.sendErrorEmbed(message.channel, "The nest id cannot be a negative number");
 
-                                                    request.get(`${panel}/api/application/nests?include=eggs`, {
+                                                    request.get(`${panel}/api/application/nests/${content}`, {
                                                         auth: {
                                                             bearer: key
                                                         }
@@ -123,118 +124,171 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                                                             return client.sendErrorEmbed(message.channel, "An error has occured!");
                                                         }
                                                         body = body.data;
+                                                        data.nestID = content;
 
-                                                        let eggs = body.map(n => n.attributes.relationships.eggs.data);
-                                                        eggs = [].concat.apply([], eggs);
-                                                        eggs = eggs.map(e => e.attributes);
-
-                                                        let egg = eggs.find(e => e.id === content);
-                                                        if (!egg) return client.sendErrorEmbed(message.channel, "Invalid egg ID");
-
-                                                        data.eggID = content;
-
-                                                        // Ask for product ram (MB)
-                                                        question = client.sendEmbed(message.channel, "Product Creation", "How much ram should this service have? (MB)")
-                                                        message.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                                                        // Ask for product egg id
+                                                        question = client.sendEmbed(message.channel, "Product Creation", "What egg would you like this service to use from the panel? (Egg ID)")
+                                                        message.channel.awaitMessages(filter, {
+                                                            max: 1,
+                                                            time: 60000,
+                                                            errors: ['time']
+                                                        })
                                                             .then(collected => {
                                                                 let msg = collected.first();
                                                                 let content = Number(msg.content);
                                                                 if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
-                                                                if (content < 0) return client.sendErrorEmbed(message.channel, "The ram amount cannot be a negative number");
-                                                                data.ram = content;
+                                                                if (content < 0) return client.sendErrorEmbed(message.channel, "The egg id cannot be a negative number");
 
-                                                                // Ask for product disk (MB)
-                                                                question = client.sendEmbed(message.channel, "Product Creation", "How much disk storage should this service have? (MB)")
-                                                                message.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
-                                                                    .then(collected => {
-                                                                        let msg = collected.first();
-                                                                        let content = Number(msg.content);
-                                                                        if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
-                                                                        if (content < 0) return client.sendErrorEmbed(message.channel, "The disk storage amount cannot be a negative number");
-                                                                        data.disk = content;
+                                                                request.get(`${panel}/api/application/nests?include=eggs`, {
+                                                                    auth: {
+                                                                        bearer: key
+                                                                    }
+                                                                }, async function (err, response, body) {
 
-                                                                        // Ask for product cpu limit (MB)
-                                                                        question = client.sendEmbed(message.channel, "Product Creation", "How much cpu should this service have?")
-                                                                        message.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
-                                                                            .then(collected => {
-                                                                                let msg = collected.first();
-                                                                                let content = Number(msg.content);
-                                                                                if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
-                                                                                if (content < 0) return client.sendErrorEmbed(message.channel, "The cpu amount cannot be a negative number");
-                                                                                data.cpu = content;
+                                                                    if (err) return client.sendErrorEmbed(message.channel, "Could not connect to panel");
+                                                                    if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid admin api key!");
 
-                                                                                // Ask for product limit
-                                                                                question = client.sendEmbed(message.channel, "Product Creation", "How many should each customer be able to order?\n\`\"0\" if you want unlimited\`")
-                                                                                message.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
-                                                                                    .then(collected => {
-                                                                                        let msg = collected.first();
-                                                                                        let content = Number(msg.content);
-                                                                                        if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
-                                                                                        if (content < 0) return client.sendErrorEmbed(message.channel, "The limit cannot be a negative number");
-                                                                                        data.limit = content;
+                                                                    try {
+                                                                        body = JSON.parse(body);
+                                                                    } catch (e) {
+                                                                        return client.sendErrorEmbed(message.channel, "An error has occured!");
+                                                                    }
+                                                                    body = body.data;
 
-                                                                                        client.serverDB.push(message.guild.id, data, "store.packages");
-                                                                                        return client.sendEmbed(message.channel, "Product Created!", "", [
-                                                                                            {
-                                                                                                name: "Title",
-                                                                                                value: data.title
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Description",
-                                                                                                value: data.description
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Price",
-                                                                                                value: `$${data.price}`
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Duration (Billing)",
-                                                                                                value: `Every (${data.duration}) days`
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Limit",
-                                                                                                value: data.limit
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Ram",
-                                                                                                value: data.ram + " MB"
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Disk Storage",
-                                                                                                value: data.disk + " MB"
-                                                                                            },
-                                                                                            {
-                                                                                                name: "Cpu Usage",
-                                                                                                value: `${data.cpu}%`
-                                                                                            }
-                                                                                        ]);
+                                                                    let eggs = body.map(n => n.attributes.relationships.eggs.data);
+                                                                    eggs = ([].concat.apply([], eggs)).map(e => e.attributes);
 
-                                                                                    })
-                                                                                    .catch((e) => console.log(e));
+                                                                    let egg = eggs.find(e => e.id === content);
+                                                                    if (!egg) return client.sendErrorEmbed(message.channel, "Invalid egg ID");
 
-                                                                            })
-                                                                            .catch((e) => console.log(e));
+                                                                    data.eggID = content;
+
+                                                                    // Ask for product ram (MB)
+                                                                    question = client.sendEmbed(message.channel, "Product Creation", "How much ram should this service have? (MB)")
+                                                                    message.channel.awaitMessages(filter, {
+                                                                        max: 1,
+                                                                        time: 60000,
+                                                                        errors: ['time']
                                                                     })
-                                                                    .catch((e) => console.log(e));
+                                                                        .then(collected => {
+                                                                            let msg = collected.first();
+                                                                            let content = Number(msg.content);
+                                                                            if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
+                                                                            if (content < 0) return client.sendErrorEmbed(message.channel, "The ram amount cannot be a negative number");
+                                                                            data.ram = content;
 
-                                                            })
-                                                            .catch((e) => console.log(e));
+                                                                            // Ask for product disk (MB)
+                                                                            question = client.sendEmbed(message.channel, "Product Creation", "How much disk storage should this service have? (MB)")
+                                                                            message.channel.awaitMessages(filter, {
+                                                                                max: 1,
+                                                                                time: 60000,
+                                                                                errors: ['time']
+                                                                            })
+                                                                                .then(collected => {
+                                                                                    let msg = collected.first();
+                                                                                    let content = Number(msg.content);
+                                                                                    if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
+                                                                                    if (content < 0) return client.sendErrorEmbed(message.channel, "The disk storage amount cannot be a negative number");
+                                                                                    data.disk = content;
+
+                                                                                    // Ask for product cpu limit (MB)
+                                                                                    question = client.sendEmbed(message.channel, "Product Creation", "How much cpu should this service have?")
+                                                                                    message.channel.awaitMessages(filter, {
+                                                                                        max: 1,
+                                                                                        time: 60000,
+                                                                                        errors: ['time']
+                                                                                    })
+                                                                                        .then(collected => {
+                                                                                            let msg = collected.first();
+                                                                                            let content = Number(msg.content);
+                                                                                            if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
+                                                                                            if (content < 0) return client.sendErrorEmbed(message.channel, "The cpu amount cannot be a negative number");
+                                                                                            data.cpu = content;
+
+                                                                                            // Ask for product limit
+                                                                                            question = client.sendEmbed(message.channel, "Product Creation", "How many should each customer be able to order?\n\`\"0\" if you want unlimited\`")
+                                                                                            message.channel.awaitMessages(filter, {
+                                                                                                max: 1,
+                                                                                                time: 60000,
+                                                                                                errors: ['time']
+                                                                                            })
+                                                                                                .then(collected => {
+                                                                                                    let msg = collected.first();
+                                                                                                    let content = Number(msg.content);
+                                                                                                    if (isNaN(content)) return client.sendErrorEmbed(message.channel, "You must provide a number");
+                                                                                                    if (content < 0) return client.sendErrorEmbed(message.channel, "The limit cannot be a negative number");
+                                                                                                    data.limit = content;
+
+                                                                                                    client.serverDB.push(message.guild.id, data, "store.packages");
+                                                                                                    return client.sendEmbed(message.channel, "Product Created!", "", [
+                                                                                                        {
+                                                                                                            name: "Title",
+                                                                                                            value: data.title
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Description",
+                                                                                                            value: data.description
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Price",
+                                                                                                            value: `$${data.price}`
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Duration (Billing)",
+                                                                                                            value: `Every (${data.duration}) days`
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Egg",
+                                                                                                            value: `${data.eggID} (Nest: ${data.nestID})`
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Limit",
+                                                                                                            value: data.limit
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Ram",
+                                                                                                            value: data.ram + " MB"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Disk Storage",
+                                                                                                            value: data.disk + " MB"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            name: "Cpu Usage",
+                                                                                                            value: `${data.cpu}%`
+                                                                                                        },
+                                                                                                    ]);
+
+
+                                                                                                })
+                                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+
+                                                                                        })
+                                                                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                                                                })
+                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+
+                                                                        });
+
+                                                                })
+                                                            });
+
                                                     });
 
                                                 })
-                                                .catch((e) => console.log(e));
+                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
 
                                         })
-                                        .catch((e) => console.log(e));
+                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
 
                                 })
-                                .catch((e) => console.log(e));
+                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
 
                         })
-                        .catch((e) => console.log(e));
+                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
 
                 })
-                .catch((e) => console.log(e));
+                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
 
             return;
         }
@@ -254,11 +308,10 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 name: product.title,
                 user: userConf.panel.data.id,
                 egg: product.eggID,
+                nest: product.nestID,
                 startup: null,
                 docker_image: null,
-                environment: {
-                    BOT_PY_FILE: "bot.py"
-                },
+                environment: {},
                 limits: {
                     memory: product.ram,
                     swap: -1,
@@ -277,7 +330,7 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 },
             }
 
-            request.get(`${panel}/api/application/nests?include=eggs`, {
+            request.get(`${panel}/api/application/nests/${params.nest}/eggs/${params.egg}?include=variables`, {
                 auth: {
                     bearer: key
                 }
@@ -291,19 +344,17 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 } catch (e) {
                     return client.sendErrorEmbed(message.channel, "An error has occured!");
                 }
-                body = body.data;
 
-                let eggs = body.map(n => n.attributes.relationships.eggs.data);
-                eggs = [].concat.apply([], eggs);
-                eggs = eggs.map(e => e.attributes);
+                let attributes = body.attributes;
 
-                let egg = eggs.find(e => e.id === params.egg);
-                if (!egg) return client.sendErrorEmbed(message.channel, "Invalid egg ID");
+                params.startup = attributes.startup;
+                params.docker_image = attributes.docker_image;
 
-                params.startup = egg.startup;
-                params.docker_image = egg.docker_image;
+                let relationships = attributes.relationships;
 
-                console.log(egg)
+                relationships.variables.data.forEach(r => {
+                    params.environment[r.attributes["env_variable"]] = r.attributes["default_value"];
+                })
 
                 request.post(`${panel}/api/application/servers`, {
                     auth: {
