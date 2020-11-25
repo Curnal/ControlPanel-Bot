@@ -70,7 +70,7 @@ module.exports = async (client, message) => {
         try {
             cmd.run(client, message, args, guildConf, userConf);
             console.log(`COMMAND - ${message.author.tag} (${message.author.id}) ran "${message.content}" in "${message.guild.name}" (${message.guild.id})`);
-            client.serverDB.set(message.guild.id, (guildConf.commandsRun+1), "commandsRun");
+            client.serverDB.inc(message.guild.id, "commandsRun");
         } catch (e) {
             console.error(e);
             return;

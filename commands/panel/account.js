@@ -16,45 +16,76 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         case "signup": {
             if (Object.keys(userConf.panel.data).length != 0) return client.sendErrorEmbed(message.channel, "You already have an account");
 
-            let username = args[1];
-            if (!username) return client.sendErrorEmbed(message.channel, "Please provide a username");
+            const filter = m => m.author.id === message.author.id;
 
-            let email = args[2];
-            if (!email) return client.sendErrorEmbed(message.channel, "Please provide an email");
+            let username;
+            let email;
 
-            let EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!EMAIL_REGEX.test(email)) return client.sendErrorEmbed(message.channel, "Please provide a valid email")
+            await client.sendEmbed(message.channel, "Check your dms")
 
-            let password = client.generatePassword(10);
-            const data = {
-                username: username,
-                email: email,
-                first_name: username,
-                last_name: username,
-                password: password,
-                root_admin: false,
-                language: "en"
+            let msg;
+
+            try {
+                msg = await client.sendEmbed(message.author, "Account Creation", "Please respond to the questions below in order to create an account.")
+            } catch(e) {
+                return client.sendErrorEmbed(message.channel, "Please turn your dms on and try again.")
             }
 
-            request.post(`${panel}/api/application/users`, {
-                auth: {
-                    bearer: key
-                },
-                json: data
-            }, async function(err, response, body) {
+            // Ask for panel username
+            client.sendEmbed(message.author, "1. Username", "What would you like your username to be?");
+            msg.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                .then(collected => {
+                    let msg = collected.first();
+                    let content = msg.content;
+                    if (content.length > 520) return client.sendErrorEmbed(message.author, "Username is over 20 characters");
+                    username = content;
 
-                let errors = response.body.errors;
-                if (errors && errors.length > 0) return client.sendErrorEmbed(message.channel, errors[0].detail);
+                    // Ask for panel email
+                    client.sendEmbed(message.author, "2. Email", "What would you like your email to be?");
+                    msg.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                        .then(collected => {
+                            let msg = collected.first();
+                            let content = msg.content;
+                            email = content;
 
-                if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
-                if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
+                            let EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                            if (!EMAIL_REGEX.test(email)) return client.sendErrorEmbed(message.author, "Please provide a valid email. Please start over.")
 
-                client.userDB.set(`${message.author.id}-${message.guild.id}`, response.body.attributes, "panel.data");
+                            let password = client.generatePassword(10);
+                            const data = {
+                                username: username,
+                                email: email,
+                                first_name: username,
+                                last_name: username,
+                                password: password,
+                                root_admin: false,
+                                language: "en"
+                            }
 
-                await client.sendEmbed(message.channel, `Your account has been created!`, "Check your dms");
-                await client.sendEmbed(message.author, `Account Details`, `**Username**: ${username}\n**Email**: ${email}\n**Password**: ${password}`);
+                            request.post(`${panel}/api/application/users`, {
+                                auth: {
+                                    bearer: key
+                                },
+                                json: data
+                            }, async function(err, response, body) {
 
-            });
+                                let errors = response.body.errors;
+                                if (errors && errors.length > 0) return client.sendErrorEmbed(message.author, errors[0].detail);
+
+                                if (err) return client.sendErrorEmbed(message.author, "An error has occured");
+                                if (response.statusCode === 403) return client.sendErrorEmbed(message.author, "Invalid api key!");
+
+                                client.userDB.set(`${message.author.id}-${message.guild.id}`, response.body.attributes, "panel.data");
+
+                                await client.sendEmbed(message.author, `Account Details`, `**Username**: ${username}\n**Email**: ${email}\n**Password**: ${password}`);
+
+                            });
+
+                        })
+                        .catch((e) => console.log(e));
+
+                })
+                .catch((e) => console.log(e));
 
             return;
 
@@ -86,7 +117,12 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
             if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
 
-            client.userDB.set(`${message.author.id}-${message.guild.id}`, [], "panel");
+            client.userDB.set(`${message.author.id}-${message.guild.id}`, {
+                focused: null,
+                apiKey: null,
+                data: {},
+                servers: []
+            }, "panel");
             return client.sendEmbed(message.channel, "Your account has been unlinked!");
 
         }

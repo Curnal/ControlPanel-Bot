@@ -257,7 +257,7 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 startup: null,
                 docker_image: null,
                 environment: {
-                    BOT_JS_FILE: "index.js"
+                    BOT_PY_FILE: "bot.py"
                 },
                 limits: {
                     memory: product.ram,
@@ -314,8 +314,6 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                     maxRedirects: 5,
                 }, async function(err, response, body) {
 
-                    //return;
-
                     let server = response.body.attributes;
 
                     let errors = response.body.errors;
@@ -338,12 +336,14 @@ Egg: ${server.egg}
                     
                     `);
 
+                    client.serverDB.inc(message.guild.id, "panel.serversCreated");
                     client.userDB.push(`${message.author.id}-${message.guild.id}`, product, "store.products.active");
 
                 });
 
-
             });
+
+            return;
 
         }
         case "delete": {
