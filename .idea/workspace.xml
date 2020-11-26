@@ -19,12 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Fixed error messages">
+    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Updated store.js&#10;Updated active.js&#10;Updated suspended.js&#10;Updated pending.js&#10;Updated cancelled.js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/billing/active.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/billing/active.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/billing/cancelled.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/billing/cancelled.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/billing/pending.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/billing/pending.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/billing/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/billing/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/message.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +113,7 @@
       <workItem from="1606068027214" duration="7135000" />
       <workItem from="1606108197449" duration="25711000" />
       <workItem from="1606256865957" duration="9084000" />
-      <workItem from="1606326230807" duration="15484000" />
+      <workItem from="1606326230807" duration="16173000" />
     </task>
     <task id="LOCAL-00001" summary="Config cleanup">
       <created>1604522770213</created>
@@ -237,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606367023495</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Updated store.js&#10;Updated active.js&#10;Updated suspended.js&#10;Updated pending.js&#10;Updated cancelled.js">
+      <created>1606368209300</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1606368209300</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +278,8 @@
     <MESSAGE value="Fixed entire store system" />
     <MESSAGE value="Create power.js" />
     <MESSAGE value="Fixed error messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed error messages" />
+    <MESSAGE value="Updated store.js&#10;Updated active.js&#10;Updated suspended.js&#10;Updated pending.js&#10;Updated cancelled.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated store.js&#10;Updated active.js&#10;Updated suspended.js&#10;Updated pending.js&#10;Updated cancelled.js" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2004" y="475" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606256619078">
@@ -327,11 +332,11 @@
     <state width="1674" height="310" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182293" />
     <state width="2135" height="318" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
     <state width="1823" height="399" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606368125627" />
-    <state x="1339" y="363" key="Vcs.Push.Dialog.v2" timestamp="1606367038259">
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2" timestamp="1606368213595">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604729109120" />
-    <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606367038259" />
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606368213595" />
     <state x="1324" y="310" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606172876588">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

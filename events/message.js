@@ -65,6 +65,12 @@ module.exports = async (client, message) => {
         }
     }
 
+    if (cmd.help.owner != null) {
+        if (!client.isOwner(message)) {
+            return client.sendErrorEmbed(message.channel, `Missing: OWNER`);
+        }
+    }
+
     if (message.guild) {
 
         try {
