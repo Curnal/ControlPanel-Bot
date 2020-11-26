@@ -17,7 +17,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         case "view": {
             return client.sendEmbed(message.channel,
                 "💰 Store",
-                guildConf.store.packages.length === 0 ? "There are no packages available at the moment.\n\`Please check again later\`" : ((guildConf.store.packages.map((p, index) => `**${index+1}**. ${p.title} - Price: $${p.price}`).join('\n'))),
+                guildConf.store.packages.length === 0 ? `There are no packages available at the moment.\n\`Please check again later\`` : ((guildConf.store.packages.map((p, index) => `**${index+1}**. ${p.title} - Price: $${p.price}`).join('\n')) + `\n\n\`${guildConf.prefix}store buy [number]\` to purchase a server`),
             );
         }
         case "info": {
