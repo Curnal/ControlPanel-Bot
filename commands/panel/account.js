@@ -32,7 +32,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             }
 
             // Ask for panel username
-            client.sendEmbed(message.author, "1. Username", "What would you like your username to be?");
+            await client.sendEmbed(message.author, "1. Username", "What would you like your username to be?");
             msg.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
                 .then(collected => {
                     let msg = collected.first();
@@ -90,26 +90,40 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             return;
 
         }
-        case "link": {
+        case "api": {
 
-            let userKey = args[1];
-            if (!userKey) return client.sendErrorEmbed(message.channel, "You must provide your api key from the panel");
+            await client.sendEmbed(message.channel, "Check your dms");
 
-            message.delete();
+            let msg;
 
-            request.get(`${panel}/api/client`, {
-                auth: {
-                    bearer: userKey
-                }
-            }, async function(err, response, body) {
+            try {
+                msg = await client.sendEmbed(message.author, "Account API", "Please send your api key from the panel below")
+            } catch(e) {
+                return client.sendErrorEmbed(message.channel, "Please turn your dms on and try again.")
+            }
 
-                if (err) return client.sendErrorEmbed(message.channel, "An error has occured!");
-                if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
+            const filter = m => m.author.id === message.author.id;
+            msg.channel.awaitMessages(filter, { max: 1, time: 60000, errors: ['time'] })
+                .then(collected => {
+                    let msg = collected.first();
+                    let content = msg.content;
 
-                client.userDB.set(`${message.author.id}-${message.guild.id}`, userKey, "panel.apiKey");
-                return client.sendEmbed(message.channel, "Your account has been linked!");
+                    request.get(`${panel}/api/client`, {
+                        auth: {
+                            bearer: content
+                        }
+                    }, async function(err, response, body) {
 
-            });
+                        if (err) return client.sendErrorEmbed(message.author, "An error has occured!");
+                        if (response.statusCode === 403) return client.sendErrorEmbed(message.author, "Invalid api key!");
+
+                        client.userDB.set(`${message.author.id}-${message.guild.id}`, content, "panel.apiKey");
+                        return client.sendEmbed(message.author, "Your api key has been saved!");
+
+                    });
+
+                })
+                .catch((e) => console.log(e));
 
             return;
         }
@@ -130,9 +144,31 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
             if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
 
-            let user = userConf.panel.data;
-            return client.sendEmbed(message.channel, "Panel User", `
+            let userID = userConf.panel.data.id;
+
+            request.get(`${panel}/api/application/users/${userID}`, {
+                auth: {
+                    bearer: key
+                }
+            }, async function(err, response, body) {
+
+                let errors = response.body.errors;
+                if (errors && errors.length > 0) return client.sendErrorEmbed(message.channel, errors[0].detail);
+
+                if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
+                if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
+
+                client.userDB.set(`${message.author.id}-${message.guild.id}`, response.body.attributes, "panel.data");
+
+                await client.sendEmbed(message.channel, "Check your dms");
+
+                body = JSON.parse(body);
+                let user = body.attributes;
+
+                try {
+                    await client.sendEmbed(message.author, "Panel User", `
 **First Name**: ${user.first_name}
+**Last Name**: ${user.last_name}
 **Language**: ${user.language}
 **Admin**: ${user.root_admin ? "✅" : "❌"}
 
@@ -144,8 +180,15 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 **Last Updated**: ${moment(new Date()).diff(user.updated_at, 'days') + ' days ago'}
 
 `)
+                } catch(e) {
+                    await client.sendErrorEmbed(message.channel, "Please turn your dms on and try again.")
+                }
+
+            });
+
+            return;
         }
-        case "reset": {
+        case "resetpassword": {
 
             if (Object.keys(userConf.panel.data).length === 0) return client.sendErrorEmbed(message.channel, `You must signup\n${guildConf.prefix}account signup`);
 
@@ -168,7 +211,6 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             }, async function(err, response, body) {
 
                 let errors = response.body.errors;
-                console.log(errors);
                 if (errors && errors.length > 0) return client.sendErrorEmbed(message.channel, errors[0].detail);
 
                 if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
@@ -185,7 +227,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         }
     }
 
-    return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, link, unlink, info, reset\`\`\`")
+    return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, api, unlink, info, resetpassword\`\`\`")
 
 }
 

@@ -31,8 +31,7 @@ exports.run = async (client, message, args) => {
 
     embed.addField("Panel", `
     account, listservers, focus,
-    info, start, stop, restart,
-    nodes`)
+    info, power, nodes`)
 
     embed.addField("Staff", `
     setpanel, setapikey,

@@ -59,11 +59,11 @@ Last Updated: ${moment(new Date()).diff(attributes.updated_at, 'days') + ' days 
                 name: `Servers [${servers.length}]`,
                 value: `
 **Total Limits**:
-- Ram: ${servers.map(s => s.limits.memory).reduce((a, b) => a + b)} MB
-- Disk: ${servers.map(s => s.limits.disk).reduce((a, b) => a + b)} MB
-- CPU: ${servers.map(s => s.limits.cpu).reduce((a, b) => a + b)}%
-- Databases: ${servers.map(s => s.feature_limits.databases).reduce((a, b) => a + b)}
-- Allocations: ${servers.map(s => s.feature_limits.allocations).reduce((a, b) => a + b)}
+- Ram: ${servers.length === 0 ? "0" : servers.map(s => s.limits.memory).reduce((a, b) => a + b)} MB
+- Disk: ${servers.length === 0 ? "0" : servers.map(s => s.limits.disk).reduce((a, b) => a + b)} MB
+- CPU: ${servers.length === 0 ? "0" : servers.map(s => s.limits.cpu).reduce((a, b) => a + b)}%
+- Databases: ${servers.length === 0 ? "0" : servers.map(s => s.feature_limits.databases).reduce((a, b) => a + b)}
+- Allocations: ${servers.length === 0 ? "0" : servers.map(s => s.feature_limits.allocations).reduce((a, b) => a + b)}
 `
             }
         ])

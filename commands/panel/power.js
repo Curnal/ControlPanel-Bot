@@ -11,30 +11,51 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
     if (userConf.panel.focused === null) return client.sendErrorEmbed(message.channel, "You havent focused a server");
 
+    let power = args[0];
+    if (!["start", "kill", "stop", "restart"].includes(power)) return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`start, stop, kill, restart\`\`\`");
+
+    let msg;
+    switch(power) {
+        case "start": {
+            msg = "Server is starting!";
+            break;
+        }
+        case "kill": {
+            msg = "Server has been killed";
+            break;
+        }
+        case "stop": {
+            msg = "Server is now stopping.";
+            break;
+        }
+        case "restart": {
+            msg = "Server is restarting.";
+            break;
+        }
+    }
+
     request.post(`${panel}/api/client/servers/${userConf.panel.focused}/power`, {
         auth: {
-            'bearer': key
+            bearer: key
         },
         json: {
-            signal: 'kill'
+            signal: power
         }
     }, async function(err, response, body) {
 
         if (err) return client.sendErrorEmbed(message.channel, "An error has occured");
         if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
 
-        await client.sendEmbed(message.channel, `Server killed!`);
+        await client.sendEmbed(message.channel, msg);
 
     });
-
-    return;
 
 }
 
 module.exports.help = {
-    name: "kill",
-    description: "Kills the focused server",
+    name: "power",
+    description: "Run a power action on the focused server",
     dm: false,
     cooldown: 2,
-    aliases: ["killserver"]
+    aliases: []
 }
