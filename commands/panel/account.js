@@ -21,7 +21,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             let username;
             let email;
 
-            await client.sendEmbed(message.channel, "Check your dms")
+            await client.sendEmbed(message.channel, "Check your dms");
 
             let msg;
 

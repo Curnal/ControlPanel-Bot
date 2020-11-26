@@ -45,7 +45,7 @@ client.defaultServerDB = {
     panel: {
         apiKey: "",
         url: "",
-        serverCreated: 0
+        serversCreated: 0
     },
     nodes: [],
     store: {

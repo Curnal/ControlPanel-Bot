@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
         embed.addField("Owner", `
         eval, reload, servers,
         panels, startall, reload,
-        load, unload`)
+        load, unload, forcelink`)
     }
 
     await message.channel.send(embed);

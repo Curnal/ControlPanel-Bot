@@ -299,8 +299,17 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
 
             let products = guildConf.store.packages;
 
+            // Fetch product
             let product = products[productIndex];
             if (!product) return client.sendErrorEmbed(message.channel, "Invalid product id");
+
+            // Check if limit has been reached
+            let limit = product.limit;
+            let found = 0;
+            userConf.store.products.active.forEach(p => {
+                if (p.title === product.title) found++;
+            })
+            if (found >= limit) return client.sendErrorEmbed(message.channel, "You have reached the limit for that product.");
 
             let key = guildConf.panel.apiKey;
 
@@ -366,6 +375,7 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                 }, async function(err, response, body) {
 
                     let server = response.body.attributes;
+                    product.panelData = server;
 
                     let errors = response.body.errors;
                     if (errors && errors.length > 0) return client.sendErrorEmbed(message.channel, errors[0].detail);

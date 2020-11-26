@@ -1,7 +1,6 @@
 module.exports = async (client, message) => {
 
     if (message.author.bot) return;
-
     let args;
     let guildConf;
     let userConf;
@@ -49,6 +48,7 @@ module.exports = async (client, message) => {
 
     if (client.config.deleteMessage) await message.delete();
     if (!cmd) return;
+
     if (!message.guild && !cmd.help.dm) return client.sendEmbed(message.channel, "You may only use that command in servers!");
 
     if (cmd.help.cooldown != null) {
