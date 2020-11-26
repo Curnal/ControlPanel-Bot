@@ -7,7 +7,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     let key = userConf.panel.apiKey;
 
     if (!panel) return client.sendErrorEmbed(message.channel, "No panel has been setup!");
-    if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
+    if (!key) return client.sendErrorEmbed(message.channel, `You havent set your api key!\nDo: ${guildConf.prefix}account api`);
 
     if (userConf.panel.focused === null) return client.sendErrorEmbed(message.channel, "You havent focused a server");
 

@@ -7,7 +7,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     let key = userConf.panel.apiKey;
 
     if (!panel) await client.sendErrorEmbed(message.channel, "No panel has been setup!");
-    if (!key) return client.sendErrorEmbed(message.channel, "You havent set your api key!\nDo: cp!account link API-KEY");
+    if (!key) return client.sendErrorEmbed(message.channel, `You havent set your api key!\nDo: ${guildConf.prefix}account api`);
 
     let serverID = args[0];
     if (!serverID) return client.sendErrorEmbed(message.channel, "You must provide a valid server number!\nDo: cp!listservers to see your servers");
@@ -46,11 +46,10 @@ CPU: ${body.limits.cpu}%
                 name: "Commands",
                 value: `
 \`\`\`
-${p}start
-${p}stop
-${p}kill
-${p}restart
-${p}info
+${p}power
+${p}databases (coming soon)
+${p}manage (coming soon)
+${p}allocations (coming soon)
 \`\`\``
             }
         ]);
