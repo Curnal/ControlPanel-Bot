@@ -79,7 +79,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
                                 await client.sendEmbed(message.author, `Account Details`, `**Username**: ${username}\n**Email**: ${email}\n**Password**: ${password}`);
 
-                                client.log("PTERODACTYL", `${guildConf.panel.url} -> created user`);
+                                client.log("PTERODACTYL", `${guildConf.panel.url} -> created user: ${email}`);
 
                             });
 

@@ -1,6 +1,13 @@
 module.exports = async (client, message) => {
 
     if (message.author.bot) return;
+
+    if (message.guild) {
+        client.log("guildMessage", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`)
+    } else {
+        client.log("directMessage", `[User: ${message.author.username}#${message.author.discriminator}]: "${message.content}"`)
+    }
+
     let args;
     let guildConf;
     let userConf;
@@ -79,10 +86,11 @@ module.exports = async (client, message) => {
 
         try {
             cmd.run(client, message, args, guildConf, userConf);
-            console.log(`COMMAND - ${message.author.tag} (${message.author.id}) ran "${message.content}" in "${message.guild.name}" (${message.guild.id})`);
+            console.log("command", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
             client.serverDB.inc(message.guild.id, "commandsRun");
         } catch (e) {
-            console.error(e);
+            client.error(4, `Could not run command "${cmd}"\n${e}`);
+            await client.sendErrorEmbed(message.channel, "An unknown error has occurred.\nReport this to: FlaringPhoenix#0001");
             return;
         }
 
@@ -90,9 +98,11 @@ module.exports = async (client, message) => {
 
         try {
             cmd.run(client, message, args);
-            console.log(`COMMAND - ${message.author.tag} (${message.author.id}) ran "${message.content}" in their DMS`)
+            console.log("command", `[DMS] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
+            return;
         } catch (e) {
-            console.error(e);
+            client.error(4, `Could not run command "${cmd}"\n${e}`);
+            await client.sendErrorEmbed(message.author, "An unknown error has occurred.\nReport this to: FlaringPhoenix#0001");
             return;
         }
 
