@@ -43,7 +43,7 @@ exports.run = async (client, message, args) => {
         eval, reload, servers,
         panels, startall, reload,
         load, unload, forcelink,
-        restart`)
+        shutdown`)
     }
 
     await message.channel.send(embed);
