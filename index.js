@@ -11,7 +11,15 @@ require('moment-duration-format');
 Discord.Constants.DefaultOptions.ws.properties.$browser = "Discord Android";
 
 // Create client
-const client = new Discord.Client();
+const client = new Discord.Client({
+    ws: {
+        intents: [
+            'GUILD_MESSAGES',
+            'GUILDS',
+            'GUILD_MEMBERS'
+        ]
+    }
+});
 
 // Loads config.js
 config = require('./config.js');
@@ -41,7 +49,7 @@ client.userDB = new Enmap({
 
 client.defaultServerDB = {
     commandsRun: 0,
-    prefix: "cp!!",
+    prefix: client.config.dmPrefix,
     panel: {
         apiKey: "",
         url: "",
