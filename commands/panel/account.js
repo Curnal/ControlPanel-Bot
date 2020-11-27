@@ -137,7 +137,9 @@ exports.run = async (client, message, args, guildConf, userConf) => {
                 data: {},
                 servers: []
             }, "panel");
-            return client.sendEmbed(message.channel, "Your account has been unlinked!");
+            client.sendEmbed(message.channel, "Your account has been unlinked!");
+
+            return;
 
         }
         case "info": {
@@ -227,7 +229,8 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         }
     }
 
-    return client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, api, unlink, info, resetpassword\`\`\`")
+    await client.sendEmbed(message.channel, "Invalid argument", "\`\`\`signup, api, unlink, info, resetpassword\`\`\`");
+    return;
 
 }
 
