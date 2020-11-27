@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Changed restart to shutdown">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/general/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/general/help.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commands/owner/restart.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/shutdown.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/owner/shutdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/shutdown.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +113,7 @@
       <workItem from="1606068027214" duration="7135000" />
       <workItem from="1606108197449" duration="25711000" />
       <workItem from="1606256865957" duration="9084000" />
-      <workItem from="1606326230807" duration="20443000" />
+      <workItem from="1606326230807" duration="20510000" />
     </task>
     <task id="LOCAL-00001" summary="Config cleanup">
       <created>1604522770213</created>
@@ -263,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606438163958</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Changed restart to shutdown">
+      <created>1606438387248</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1606438387248</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,11 +364,11 @@
     <state width="1674" height="310" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182293" />
     <state width="2135" height="318" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
     <state width="1823" height="399" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606438352101" />
-    <state x="826" y="221" key="Vcs.Push.Dialog.v2" timestamp="1606438164960">
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2" timestamp="1606438388613">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604729109120" />
-    <state x="826" y="221" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606438164960" />
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606438388613" />
     <state x="1324" y="310" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606172876588">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

@@ -9,7 +9,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
     await client.serverDB.close();
     await client.userDB.close();
 
-    process.exit(0);
+    process.exit(1);
 
 
 }
