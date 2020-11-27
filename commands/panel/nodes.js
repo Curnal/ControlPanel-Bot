@@ -36,6 +36,7 @@ exports.run = async (client, message, args, guildConf) => {
         embed.setDescription(d.length === 0 ? "None" : d.toString());
 
         await message.channel.send(embed);
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched ${d.length} nodes`);
 
 
     });

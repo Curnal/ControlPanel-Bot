@@ -261,12 +261,12 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
 
 
                                                                                                 })
-                                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                                                                                         })
-                                                                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                                                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
                                                                                 })
-                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                                                                         });
 
@@ -276,19 +276,19 @@ Run: \`${guildConf.prefix}store buy ${args[1]}\` to purchase
                                                     });
 
                                                 })
-                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                                         })
-                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                                 })
-                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                         })
-                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                        .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
                 })
-                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "An error has occured, please try again."); });
+                .catch((e) => { console.log(e); return client.sendEmbed(message.channel, "You have not responded in time. Please start over."); });
 
             return;
         }

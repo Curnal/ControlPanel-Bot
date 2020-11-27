@@ -42,6 +42,7 @@ ID: ${server.identifier}`, true)
         embed.setDescription(body.length === 0 ? "None" : "**To focus a server**:\nDo: \`cp!focus <serverID>\`")
 
         await message.channel.send(embed);
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched ${body.length} servers`);
 
     });
 

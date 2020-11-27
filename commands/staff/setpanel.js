@@ -14,6 +14,8 @@ module.exports.run = async (client, message, args) => {
     client.serverDB.set(message.guild.id, url, "panel.url");
     await client.sendEmbed(message.channel, "Panel URL Saved!", args[0]);
 
+    client.log("PTERODACTYL", `${url} -> saved panel url`);
+
     return;
 
 }

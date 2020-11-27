@@ -47,6 +47,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         if (response.statusCode === 403) return client.sendErrorEmbed(message.channel, "Invalid api key!");
 
         await client.sendEmbed(message.channel, msg);
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> ${msg}`);
 
     });
 

@@ -79,13 +79,15 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
                                 await client.sendEmbed(message.author, `Account Details`, `**Username**: ${username}\n**Email**: ${email}\n**Password**: ${password}`);
 
+                                client.log("PTERODACTYL", `${guildConf.panel.url} -> created user`);
+
                             });
 
                         })
-                        .catch((e) => console.log(e));
+                        .catch(() => client.sendErrorEmbed(message.author, "You have not responded in time. Please start over."));
 
                 })
-                .catch((e) => console.log(e));
+                .catch(() => client.sendErrorEmbed(message.author, "You have not responded in time. Please start over."));
 
             return;
 
@@ -97,9 +99,9 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             let msg;
 
             try {
-                msg = await client.sendEmbed(message.author, "Account API", "Please send your api key from the panel below")
+                msg = await client.sendEmbed(message.author, "Account API", "Please send your api key from the panel below");
             } catch(e) {
-                return client.sendErrorEmbed(message.channel, "Please turn your dms on and try again.")
+                return client.sendErrorEmbed(message.channel, "Please turn your dms on and try again.");
             }
 
             const filter = m => m.author.id === message.author.id;
@@ -118,12 +120,13 @@ exports.run = async (client, message, args, guildConf, userConf) => {
                         if (response.statusCode === 403) return client.sendErrorEmbed(message.author, "Invalid api key!");
 
                         client.userDB.set(`${message.author.id}-${message.guild.id}`, content, "panel.apiKey");
+                        client.log("PTERODACTYL", `${guildConf.panel.url} -> checked user's api key`);
                         return client.sendEmbed(message.author, "Your api key has been saved!");
 
                     });
 
                 })
-                .catch((e) => console.log(e));
+                .catch(() => client.sendErrorEmbed(message.author, "You have not responded in time. Please start over."));
 
             return;
         }

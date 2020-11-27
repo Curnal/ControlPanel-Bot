@@ -23,6 +23,8 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         body = JSON.parse(body);
         body = body.attributes;
 
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched ${userConf.panel.focused} server`);
+
         request.get(`${panel}/api/client/servers/${userConf.panel.focused}/utilization`, {
             auth: {
                 'bearer': key
@@ -56,6 +58,8 @@ Disk: ${body2.disk.current} MB / ${body2.disk.limit === 0 ? "∞" : body2.disk.l
 CPU: ${body2.cpu.current}%
 ${body2.players.current > 0 ? `Players: ${body2.players.current}/${body2.players.limit}` : ""}
 `);
+
+            client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched ${userConf.panel.focused} server's utilization`);
 
         });
 

@@ -30,6 +30,10 @@ module.exports = async (client, message) => {
                     cancelled: []
                 }
             },
+            boosting: {
+                isBoosting: false,
+
+            },
             lastSeen: Date.now()
         });
 

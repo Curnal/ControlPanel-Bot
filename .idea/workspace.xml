@@ -19,9 +19,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Create restart.js">
-      <change afterPath="$PROJECT_DIR$/events/guildMemberUpdate.js" afterDir="false" />
+    <list default="true" id="d52b50ab-fff1-48a4-8a7c-af55d528b5cf" name="Default Changelist" comment="Fixed default prefix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/billing/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/billing/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/owner/forcelink.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/owner/forcelink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/focus.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/focus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/info.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/listservers.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/listservers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/nodes.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/nodes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/panel/power.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/panel/power.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/staff/eggs.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/staff/eggs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/staff/locations.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/staff/locations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/staff/nests.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/staff/nests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/commands/staff/setpanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/commands/staff/setpanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/events/message.js" beforeDir="false" afterPath="$PROJECT_DIR$/events/message.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +126,7 @@
       <workItem from="1606068027214" duration="7135000" />
       <workItem from="1606108197449" duration="25711000" />
       <workItem from="1606256865957" duration="9084000" />
-      <workItem from="1606326230807" duration="24841000" />
+      <workItem from="1606326230807" duration="29671000" />
     </task>
     <task id="LOCAL-00001" summary="Config cleanup">
       <created>1604522770213</created>
@@ -284,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606438522772</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Fixed default prefix">
+      <created>1606452481992</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1606452481992</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +346,8 @@
     <MESSAGE value="Changed restart to shutdown" />
     <MESSAGE value="Fixed shutdown command" />
     <MESSAGE value="Create restart.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create restart.js" />
+    <MESSAGE value="Fixed default prefix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed default prefix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2004" y="475" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606383438092">
@@ -356,35 +376,35 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1697" y="338" key="Github.UntrackedFilesDialog/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1604522541069" />
-    <state width="1823" height="399" key="GridCell.Tab.0.bottom" timestamp="1606452103804">
+    <state width="2017" height="399" key="GridCell.Tab.0.bottom" timestamp="1606457511229">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="1674" height="310" key="GridCell.Tab.0.bottom/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182294" />
     <state width="2135" height="318" key="GridCell.Tab.0.bottom/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
-    <state width="1823" height="399" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606452103804" />
-    <state width="1823" height="399" key="GridCell.Tab.0.center" timestamp="1606452103804">
+    <state width="2017" height="399" key="GridCell.Tab.0.bottom/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606457511229" />
+    <state width="2017" height="399" key="GridCell.Tab.0.center" timestamp="1606457511229">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="1674" height="310" key="GridCell.Tab.0.center/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182293" />
     <state width="2135" height="318" key="GridCell.Tab.0.center/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
-    <state width="1823" height="399" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606452103804" />
-    <state width="1823" height="399" key="GridCell.Tab.0.left" timestamp="1606452103804">
+    <state width="2017" height="399" key="GridCell.Tab.0.center/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606457511229" />
+    <state width="2017" height="399" key="GridCell.Tab.0.left" timestamp="1606457511228">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="1674" height="310" key="GridCell.Tab.0.left/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182292" />
     <state width="2135" height="318" key="GridCell.Tab.0.left/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102731" />
-    <state width="1823" height="399" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606452103804" />
-    <state width="1823" height="399" key="GridCell.Tab.0.right" timestamp="1606452103804">
+    <state width="2017" height="399" key="GridCell.Tab.0.left/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606457511228" />
+    <state width="2017" height="399" key="GridCell.Tab.0.right" timestamp="1606457511229">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="1674" height="310" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.228.1920.1160/3440.231.1920.1160@0.0.3440.1400" timestamp="1606092182293" />
     <state width="2135" height="318" key="GridCell.Tab.0.right/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604732102732" />
-    <state width="1823" height="399" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606452103804" />
-    <state x="826" y="221" key="Vcs.Push.Dialog.v2" timestamp="1606438524051">
+    <state width="2017" height="399" key="GridCell.Tab.0.right/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606457511229" />
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2" timestamp="1606452504486">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1339" y="363" key="Vcs.Push.Dialog.v2/0.0.3440.1400/-1920.232.1920.1160/3440.232.1920.1160@0.0.3440.1400" timestamp="1604729109120" />
-    <state x="826" y="221" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606438524051" />
+    <state x="826" y="221" key="Vcs.Push.Dialog.v2/0.0.3440.1400/3440.0.1920.1160@0.0.3440.1400" timestamp="1606452504486" />
     <state x="1324" y="310" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606172876588">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>

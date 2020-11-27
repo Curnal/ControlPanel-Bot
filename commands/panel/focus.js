@@ -56,6 +56,8 @@ ${p}allocations (coming soon)
 
     });
 
+    client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched server ${serverID}`);
+
     client.userDB.set(`${message.author.id}-${message.guild.id}`, serverID, "panel.focused");
 
     return;

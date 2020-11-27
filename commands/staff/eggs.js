@@ -46,6 +46,7 @@ exports.run = async (client, message, args, guildConf, userConf) => {
             }
 
         await message.channel.send(embed);
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> fetched nest (${nestID})'s eggs`);
 
     });
 

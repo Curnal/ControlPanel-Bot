@@ -16,7 +16,8 @@ const client = new Discord.Client({
         intents: [
             'GUILD_MESSAGES',
             'GUILDS',
-            'GUILD_MEMBERS'
+            'GUILD_MEMBERS',
+            'DIRECT_MESSAGES'
         ]
     }
 });

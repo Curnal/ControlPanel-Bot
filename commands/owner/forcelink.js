@@ -68,6 +68,8 @@ Last Updated: ${moment(new Date()).diff(attributes.updated_at, 'days') + ' days 
             }
         ])
 
+        client.log("PTERODACTYL", `${guildConf.panel.url} -> forcelinked ${discordUser.username}`);
+
 
         return;
     });
