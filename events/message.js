@@ -2,17 +2,13 @@ module.exports = async (client, message) => {
 
     if (message.author.bot) return;
 
-    if (message.guild) {
-        client.log("guildMessage", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`)
-    } else {
-        client.log("directMessage", `[User: ${message.author.username}#${message.author.discriminator}]: "${message.content}"`)
-    }
-
     let args;
     let guildConf;
     let userConf;
 
     if (message.guild) {
+
+        client.log("guildMessage", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`)
 
         guildConf = client.serverDB.ensure(message.guild.id, client.defaultServerDB);
 
@@ -48,6 +44,8 @@ module.exports = async (client, message) => {
         args = message.content.slice(guildConf.prefix.length).trim().split(/ +/g);
 
     } else {
+
+        client.log("directMessage", `[User: ${message.author.username}#${message.author.discriminator}]: "${message.content}"`)
 
         if (message.content.indexOf(client.config.dmPrefix) !== 0) return;
         args = message.content.slice(client.config.dmPrefix.length).trim().split(/ +/g);
@@ -86,11 +84,11 @@ module.exports = async (client, message) => {
 
         try {
             cmd.run(client, message, args, guildConf, userConf);
-            console.log("command", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
-            client.serverDB.inc(message.guild.id, "commandsRun");
+            client.log("command", `[Guild: ${message.guild.name}] [Channel: "${message.channel.name}"] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
+            client.serverDB.inc(message.guild.id, "stats.commandsRun");
         } catch (e) {
-            client.error(4, `Could not run command "${cmd}"\n${e}`);
-            await client.sendErrorEmbed(message.channel, "An unknown error has occurred.\nReport this to: FlaringPhoenix#0001");
+            client.error(4, `Could not run command "${cmd.help.name}"\n${e}`);
+            await client.sendErrorEmbed(message.channel, "An unknown error has occurred.");
             return;
         }
 
@@ -98,11 +96,11 @@ module.exports = async (client, message) => {
 
         try {
             cmd.run(client, message, args);
-            console.log("command", `[DMS] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
+            client.log("command", `[DMS] [User: "${message.author.username}#${message.author.discriminator}"]: "${message.content || JSON.stringify(message.embeds)}"`);
             return;
         } catch (e) {
-            client.error(4, `Could not run command "${cmd}"\n${e}`);
-            await client.sendErrorEmbed(message.author, "An unknown error has occurred.\nReport this to: FlaringPhoenix#0001");
+            client.error(4, `Could not run command "${cmd.help.name}"\n${e}`);
+            await client.sendErrorEmbed(message.author, "An unknown error has occurred.");
             return;
         }
 

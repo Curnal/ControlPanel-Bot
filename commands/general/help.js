@@ -31,12 +31,11 @@ exports.run = async (client, message, args) => {
 
     embed.addField("Panel", `
     account, listservers, focus,
-    info, power, nodes`)
+    info, power, nodes, panel`)
 
     embed.addField("Staff", `
-    setpanel, setapikey,
-    eggs, locations, nests,
-    setprefix`)
+    config, eggs, locations,
+    nests`)
 
     if (client.isOwner(message)) {
         embed.addField("Owner", `

@@ -49,18 +49,23 @@ client.userDB = new Enmap({
 });
 
 client.defaultServerDB = {
-    commandsRun: 0,
     prefix: client.config.dmPrefix,
+    stats: {
+        commandsRun: 0,
+        serversCreated: 0
+    },
     panel: {
         apiKey: "",
-        url: "",
-        serversCreated: 0
+        url: ""
     },
     nodes: [],
     store: {
         payments: [],
         packages: [],
         logChannel: null
+    },
+    config: {
+
     }
 
 }
